@@ -19,9 +19,6 @@ import Fav from './components/fav';
 import Set from './components/set';
 import Top from './components/top';
 
-//import getTasks from './actions/tasks';
-//getTasks();
-
 require('../css/main.less');
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
