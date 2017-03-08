@@ -1,0 +1,197 @@
+body {
+  background: url('/img/bg.jpg') 50% 0 fixed no-repeat;
+  font-family: 'Roboto', sans-serif;
+}
+.clear {
+  clear: both;
+}
+.text-center {
+  text-align: center;
+}
+#app {
+  max-width: 992px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.toolbar {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+.toolbar a {
+  padding: 17px;
+  color: #fff;
+}
+.toolbar a:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.toolbar a.active {
+  background-color: #000;
+}
+.form-top {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  padding: 30px;
+  text-align: center;
+}
+.form-top legend {
+  margin: 0 auto 10px;
+  color: green;
+}
+.form-top input[type="text"] {
+  text-align: center;
+}
+.form-top,
+.table-tasks th,
+.table-tasks td {
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+.form-buttons {
+  margin-top: 15px;
+}
+.form-error {
+  margin-top: 10px;
+  color: red;
+}
+.chip {
+  display: inline-block !important;
+  margin: 1px!important;
+  line-height: 40px!important;
+}
+.toolbar {
+  position: relative;
+}
+.toolbar #select-city {
+  position: absolute!important;
+  left: 50%;
+  top: 0;
+  width: 200px!important;
+  background: #fff;
+  margin-left: -100px;
+}
+.dropdown-menu {
+  height: 100%!important;
+}
+.dropdown-menu button {
+  fill: #000!important;
+}
+.dropdown-menu button + div {
+  border-top: 0!important;
+}
+.table-tasks {
+  background: none!important;
+}
+.table-tasks thead,
+.table-tasks tbody {
+  background: none!important;
+}
+.table-tasks td {
+  font-size: 15px!important;
+  white-space: normal!important;
+  vertical-align: top;
+}
+.table-tasks strong {
+  display: block;
+  margin-top: 14px;
+}
+.table-tasks .selected td {
+  background: rgba(240, 240, 240, 0.95) !important;
+}
+.table-tasks tr:hover td {
+  background: #fff!important;
+}
+.table-tasks .finished {
+  background-color: #C8E6C9!important;
+}
+.table-tasks .status {
+  margin: 8px 0 0 -10px;
+}
+.table-tasks .categories {
+  color: #666;
+}
+.table-tasks .toggle {
+  display: inline-block;
+  width: 70px!important;
+  overflow: hidden;
+}
+.table-tasks .toggle > div {
+  display: inline-block !important;
+}
+.table-tasks .toggle > div > div > div {
+  float: none!important;
+  display: block!important;
+}
+.table-actions {
+  width: 170px;
+}
+.table-actions button.toggle > div > div:first-of-type {
+  margin: -10px 0 0 15px !important;
+}
+th.table-actions {
+  text-align: center!important;
+}
+td.table-actions-cab {
+  padding-top: 25px;
+}
+td.table-actions-all > * {
+  margin-bottom: 10px;
+}
+.task-footer {
+  padding-top: 0!important;
+}
+.task-footer > div {
+  display: inline-block;
+  width: 24.8%;
+  margin: 0 1px 1px 0;
+}
+.task-footer > div > span > div > div {
+  padding: 16px 16px 16px 55px!important;
+}
+.task-footer .likes > div > div {
+  padding-left: 55px!important;
+}
+.task-footer .likes > div > div > svg {
+  margin: 12px!important;
+}
+.task-footer .applicants > div > div > svg {
+  width: 20px!important;
+  height: 20px!important;
+}
+.task-footer .likes.active,
+.task-footer .applicants.active {
+  background-color: rgba(0, 0, 0, 0.0980392) !important;
+}
+#search-adv-btn {
+  color: #a9a9a9;
+}
+#search-adv-inputs {
+  display: none;
+}
+.search-form-input {
+  display: inline-block !important;
+  width: 300px!important;
+  text-align: left;
+}
+.search-form-date {
+  width: 256px!important;
+  margin: 0 20px!important;
+}
+.search-form-date input[type="text"] {
+  text-align: left;
+}
+.action-cancel {
+  float: right;
+  margin-top: -4px;
+}
+@media only screen and (max-width: 992px) {
+  .task-footer {
+    white-space: normal;
+  }
+  .task-footer > div {
+    display: inline-block;
+    width: 49.8%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .task-footer > div {
+    width: 100%;
+  }
+}
