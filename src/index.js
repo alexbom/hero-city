@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Router, Route, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { apiMiddleware } from 'redux-api-middleware';
 import thunk from 'redux-thunk';
 import _ from 'lodash';
 import reducer from './reducers';
@@ -21,7 +22,7 @@ import Top from './components/top';
 
 require('../css/main.less');
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(apiMiddleware, thunk)));
 const history = syncHistoryWithStore(hashHistory, store);
 
 render(
@@ -37,4 +38,24 @@ render(
     document.getElementById('app')
 );
 
-store.dispatch({ type: 'TASK_GET_ALL' });
+import { CALL_API } from 'redux-api-middleware';
+
+store.dispatch({
+    [CALL_API]: {
+        //headers: { 'Content-Type': 'application/json' },
+        endpoint: '/api/tasks/get-json/index.json',
+        method: 'GET',
+        types: [
+            'REQUEST',
+            {
+                type: 'SUCCESS',
+                payload: (action, state, data) => {
+                    data.json().then(json => {
+                        store.dispatch({ type: 'TASK_GET', payload: json });
+                    });
+                }
+            },
+            'FAILURE'
+        ]
+    }
+});

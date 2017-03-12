@@ -5,8 +5,6 @@ import TaskList from './task/list';
 import SearchForm from './task/search-form';
 import Menu from './main/menu';
 
-import { getTasks } from '../actions/tasks';
-
 class All extends React.Component {
 
     constructor(props) {
@@ -15,10 +13,6 @@ class All extends React.Component {
         this.state = {
             cityId: 0
         };
-
-        // refactoring: https://www.npmjs.com/package/redux-api-middleware
-
-        this.props.onTaskGet();
     }
 
     findTask(props) {
@@ -88,9 +82,6 @@ export default connect(
     dispatch => ({
         onTaskFind: (payload) => {
             dispatch({ type: 'TASK_FIND', payload });
-        },
-        onTaskGet: () => {
-            dispatch(getTasks());
         }
     })
 )(All);

@@ -10,8 +10,8 @@ module.exports = function() {
             './src'
         ],
         output: {
-            path: path.join(__dirname, '../src'),
-            filename: 'bundle.js'
+            path: __dirname,
+            filename: '../src/bundle.js'
         },
         resolve: {
             modulesDirectories: ['node_modules', 'src'],

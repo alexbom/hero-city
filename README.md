@@ -3,4 +3,4 @@
 
 Инструменты: Webpack, Babel, React, Redux.
 
-http://hero.tihoemesto.ru/
+Демо: http://hero.tihoemesto.ru/

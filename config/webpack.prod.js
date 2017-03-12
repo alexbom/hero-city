@@ -4,8 +4,8 @@ module.exports = function() {
             javascript: './src/index.js'
         },
         output: {
-            path: __dirname,
-            filename: '../app.js'
+            path: path.join(__dirname, '../'),
+            filename: 'app.js'
         },
         module: {
             loaders: [
