@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { CALL_API } from 'redux-api-middleware';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import TaskList from './task/list';
-import TaskForm from './task/edit-form';
-import Menu from './main/menu';
-import { user } from './main/data';
+import TaskList from '../components/task/list';
+import TaskForm from '../components/task/edit-form';
+import Menu from '../components/main/menu';
+import { user } from '../components/main/data';
 
-class Cab extends React.Component {
+class My extends React.Component {
 
     constructor(props) {
         super(props);
@@ -15,6 +16,8 @@ class Cab extends React.Component {
             taskEdit: 0,
             cityId: 0
         };
+
+        this.props.onTaskGet();
     }
 
     createTask(task) {
@@ -83,10 +86,11 @@ class Cab extends React.Component {
 }
 
 export default connect(
-    (state, ownProps) => ({
+    /*(state, ownProps) => ({
         tasks: _.filter(state.tasks, task => task.published_by === user.id),
         ownProps
-    }),
+    }),*/
+    state => state,
     dispatch => ({
         onCreateTask: (payload) => {
             dispatch({ type: 'TASK_CREATE', payload });
@@ -102,6 +106,28 @@ export default connect(
         },
         onStatusTask: (payload) => {
             dispatch({ type: 'TASK_STATUS', payload });
+        },
+        onTaskGet: () => {
+            dispatch({ type: 'TASK_LOAD' });
+
+            dispatch({
+                [CALL_API]: {
+                    endpoint: '/api/tasks/get_my.json',
+                    method: 'GET',
+                    types: [
+                        'REQUEST',
+                        {
+                            type: 'SUCCESS',
+                            payload: (action, state, data) => {
+                                data.json().then(payload => {
+                                    dispatch({ type: 'TASK_GET', payload });
+                                });
+                            }
+                        },
+                        'FAILURE'
+                    ]
+                }
+            })
         }
     })
-)(Cab);
+)(My);

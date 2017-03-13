@@ -63,7 +63,7 @@ class TaskListItem extends React.Component {
         $('html, body').animate({ scrollTop: $(event.target).closest('tr').offset().top }, 'fast');
     }
 
-    renderCabActions() {
+    renderMyActions() {
         const menuItems = _.map(statuses, (status, index) =>
             (
                 <MenuItem
@@ -81,7 +81,7 @@ class TaskListItem extends React.Component {
         };
 
         return (
-            <TableRowColumn className="table-actions table-actions-cab">
+            <TableRowColumn className="table-actions table-actions-my">
                 <IconButton
                     className="toggle"
                     tooltipPosition="bottom-center"
@@ -232,7 +232,7 @@ class TaskListItem extends React.Component {
     render() {
         const className = this.props.isHidden ? 'selected' : '';
 
-        const actions = (this.props.location.pathname === '/cab') ? this.renderCabActions() : this.renderAllActions();
+        const actions = (this.props.location.pathname === '/my') ? this.renderMyActions() : this.renderAllActions();
 
         return (
             <TableRow onClick={this.openTask.bind(this)} className={className}>

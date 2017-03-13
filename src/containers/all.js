@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { CALL_API } from 'redux-api-middleware';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import TaskList from './task/list';
-import SearchForm from './task/search-form';
-import Menu from './main/menu';
+import TaskList from '../components/task/list';
+import SearchForm from '../components/task/search-form';
+import Menu from '../components/main/menu';
 
 class All extends React.Component {
 
@@ -13,6 +14,8 @@ class All extends React.Component {
         this.state = {
             cityId: 0
         };
+
+        this.props.onTaskGet();
     }
 
     findTask(props) {
@@ -80,8 +83,30 @@ export default connect(
         tasks: filterTasks(state)
     }),
     dispatch => ({
-        onTaskFind: (payload) => {
+        onTaskFind: payload => {
             dispatch({ type: 'TASK_FIND', payload });
+        },
+        onTaskGet: () => {
+            dispatch({ type: 'TASK_LOAD' });
+
+            dispatch({
+                [CALL_API]: {
+                    endpoint: '/api/tasks/get_all.json',
+                    method: 'GET',
+                    types: [
+                        'REQUEST',
+                        {
+                            type: 'SUCCESS',
+                            payload: (action, state, data) => {
+                                data.json().then(payload => {
+                                    dispatch({ type: 'TASK_GET', payload });
+                                });
+                            }
+                        },
+                        'FAILURE'
+                    ]
+                }
+            })
         }
     })
 )(All);

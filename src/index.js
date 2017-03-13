@@ -14,11 +14,11 @@ import reducer from './reducers';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-import All from './components/all';
-import Cab from './components/cab';
-import Fav from './components/fav';
-import Set from './components/set';
-import Top from './components/top';
+import All from './containers/all';
+import My  from './containers/my';
+import Fav from './containers/fav';
+import Set from './containers/set';
+import Top from './containers/top';
 
 require('../css/main.less');
 
@@ -29,7 +29,7 @@ render(
     <Provider store={store}>
         <Router history={history}>
             <Route path="/" component={All} />
-            <Route path="/cab" component={Cab} />
+            <Route path="/my" component={My} />
             <Route path="/fav" component={Fav} />
             <Route path="/set" component={Set} />
             <Route path="/top" component={Top} />
@@ -37,25 +37,3 @@ render(
     </Provider>,
     document.getElementById('app')
 );
-
-import { CALL_API } from 'redux-api-middleware';
-
-store.dispatch({
-    [CALL_API]: {
-        //headers: { 'Content-Type': 'application/json' },
-        endpoint: '/api/tasks/get-json/index.json',
-        method: 'GET',
-        types: [
-            'REQUEST',
-            {
-                type: 'SUCCESS',
-                payload: (action, state, data) => {
-                    data.json().then(json => {
-                        store.dispatch({ type: 'TASK_GET', payload: json });
-                    });
-                }
-            },
-            'FAILURE'
-        ]
-    }
-});

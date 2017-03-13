@@ -1,9 +1,9 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Menu from './main/menu';
-import { user, statuses, categories, cities } from './main/data';
+import Menu from '../components/main/menu';
+import { user, statuses, categories, cities } from '../components/main/data';
 
-export default class Top extends React.Component {
+export default class Set extends React.Component {
 
     constructor(props) {
         super(props);

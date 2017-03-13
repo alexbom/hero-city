@@ -23,8 +23,8 @@ export default class Menu extends React.Component {
             <Toolbar className="toolbar">
                 <ToolbarGroup>
                     <Link to="/" activeClassName="active">Все задания</Link>
+                    <Link to="/my" activeClassName="active">Мои</Link>
                     <Link to="/fav" activeClassName="active">Избранные</Link>
-                    <Link to="/cab" activeClassName="active">Мои</Link>
                 </ToolbarGroup>
                 <DropDownMenu
                     className="dropdown-menu"

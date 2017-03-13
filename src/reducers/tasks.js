@@ -63,6 +63,10 @@ export default function tasks(state = initialState, action) {
 
         return [...state];
 
+    } else if (action.type === 'TASK_LOAD') {
+
+        return [...state];
+
     } else if (action.type === 'TASK_GET') {
 
         return action.payload;
