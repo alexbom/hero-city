@@ -1,4 +1,5 @@
 body {
+	margin: 0;
 	background: url('/img/bg.jpg') 50% 0 fixed no-repeat;
 	font-family: 'Roboto', sans-serif;
 }
@@ -11,13 +12,14 @@ body {
 	text-align: center;
 }
 
-#app {
+.container {
 	max-width: 992px;
 	margin: 0 auto;
 	overflow: hidden;
 }
 
 .toolbar {
+	margin-top: 3px;
 	background: rgba(0, 0, 0, .5)!important;
 
 	a {
@@ -202,6 +204,10 @@ td.table-actions-all {
 
 	.likes.active, .applicants.active {
 		background-color: rgba(0, 0, 0, 0.0980392)!important;
+	}
+
+	.finished-btn {
+		font-size: 12px!important;
 	}
 }
 

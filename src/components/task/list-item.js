@@ -18,6 +18,7 @@ import Avatar from 'material-ui/Avatar';
 import $ from 'jquery';
 import Utils from '../main/utils';
 import { user, statuses, categories } from '../main/data';
+import ReactTooltip from 'react-tooltip';
 
 class TaskListItem extends React.Component {
     
@@ -188,9 +189,12 @@ class TaskListItem extends React.Component {
 
             finished =
                 <ListItem
+                    data-tip="Задание выполнено"
+                    data-effect="solid"
+                    data-insecure="true"
                     leftAvatar={<Avatar src={finished_ava} size={30} />}
                     rightIcon={<Done style={styleDone} />}
-                    className="finished"
+                    className="finished-btn finished"
                     onClick={e=>{e.stopPropagation()}}
                 >
                     {finished_on}
@@ -204,19 +208,28 @@ class TaskListItem extends React.Component {
                 {text}
                 <List className="task-footer">
                     <ListItem
+                        data-tip="Задание добавлено"
+                        data-effect="solid"
+                        data-insecure="true"
                         leftAvatar={<Avatar src={published_ava} size={30} />}
                         onClick={e=>{e.stopPropagation()}}
                     >
                         {published_on}
                     </ListItem>
                     <ListItem
+                        data-tip="Поддержать задание"
+                        data-effect="solid"
+                        data-insecure="true"
                         leftIcon={<Favorite style={styleFavorite} />}
                         className={likesClass}
                         onClick={e=>{e.stopPropagation();this.props.onLikeTask({ taskId: props.id, userId: user.id });}}
                     >
-                        {likes}
+                        <div>{likes}</div>
                     </ListItem>
                     <ListItem
+                        data-tip="Предложить помощь"
+                        data-effect="solid"
+                        data-insecure="true"
                         leftIcon={<PanTool />}
                         className={applicantsClass}
                         onClick={e=>{e.stopPropagation();this.props.onApplicantTask({ taskId: props.id, userId: user.id });}}
@@ -225,6 +238,7 @@ class TaskListItem extends React.Component {
                     </ListItem>
                     {finished}
                 </List>
+                <ReactTooltip />
             </TableRowColumn>
         );
     }

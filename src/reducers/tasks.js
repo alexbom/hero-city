@@ -1,6 +1,7 @@
 const initialState = [];
 
 export default function tasks(state = initialState, action) {
+
     if (action.type === 'TASK_CREATE') {
 
         return [...state, action.payload];
@@ -60,10 +61,6 @@ export default function tasks(state = initialState, action) {
         } else {
             found.applicants.splice(pos, 1);
         }
-
-        return [...state];
-
-    } else if (action.type === 'TASK_LOAD') {
 
         return [...state];
 

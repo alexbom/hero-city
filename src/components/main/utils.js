@@ -33,7 +33,9 @@ export default class Utils extends React.Component {
             date = new Date(time);
         }
 
-        const yyyy = date.getFullYear();
+        const yy = date.getFullYear().toString().substr(2, 2);
+        const hh = date.getHours();
+        const ii = date.getMinutes();
         let dd = date.getDate();
         let mm = date.getMonth() + 1;
 
@@ -45,7 +47,7 @@ export default class Utils extends React.Component {
             mm = '0' + mm;
         }
 
-        return dd + '.' + mm + '.' + yyyy;
+        return dd + '.' + mm + '.' + yy + ' ' + hh + ':' + ii;
     }
 
     static nl2br(text) {

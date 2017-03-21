@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { CALL_API } from 'redux-api-middleware';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Template from '../components/main/template';
 import TaskList from '../components/task/list';
 import SearchForm from '../components/task/search-form';
-import Menu from '../components/main/menu';
+import { getAllTasks } from '../actions/tasks';
 
 class All extends React.Component {
 
@@ -24,21 +23,17 @@ class All extends React.Component {
 
     render() {
         return (
-            <MuiThemeProvider>
-                <div>
-                    <Menu />
-                    <h1 className="text-center">Город героев</h1>
-                    <SearchForm
-                        cityId={this.state.cityId}
-                        findTask={this.findTask.bind(this)}
-                    />
-                    <TaskList
-                        tasks={this.props.tasks}
-                        cityId={this.state.cityId}
-                        location={this.props.location}
-                    />
-                </div>
-            </MuiThemeProvider>
+            <Template>
+                <SearchForm
+                    cityId={this.state.cityId}
+                    findTask={this.findTask.bind(this)}
+                />
+                <TaskList
+                    tasks={this.props.tasks}
+                    cityId={this.state.cityId}
+                    location={this.props.location}
+                />
+            </Template>
         );
     }
 
@@ -79,34 +74,16 @@ function filterTasks(state) {
 }
 
 export default connect(
-    state => ({
-        tasks: filterTasks(state)
+    (state, ownProps) => ({
+        tasks: filterTasks(state),
+        ownProps
     }),
     dispatch => ({
-        onTaskFind: payload => {
+        onTaskFind: (payload) => {
             dispatch({ type: 'TASK_FIND', payload });
         },
         onTaskGet: () => {
-            dispatch({ type: 'TASK_LOAD' });
-
-            dispatch({
-                [CALL_API]: {
-                    endpoint: '/api/tasks/get_all.json',
-                    method: 'GET',
-                    types: [
-                        'REQUEST',
-                        {
-                            type: 'SUCCESS',
-                            payload: (action, state, data) => {
-                                data.json().then(payload => {
-                                    dispatch({ type: 'TASK_GET', payload });
-                                });
-                            }
-                        },
-                        'FAILURE'
-                    ]
-                }
-            })
+            dispatch(getAllTasks(dispatch));
         }
     })
 )(All);

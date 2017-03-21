@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { CALL_API } from 'redux-api-middleware';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Template from '../components/main/template';
 import TaskList from '../components/task/list';
 import TaskForm from '../components/task/edit-form';
-import Menu from '../components/main/menu';
-import { user } from '../components/main/data';
+import { getMyTasks } from '../actions/tasks';
 
 class My extends React.Component {
 
@@ -55,31 +53,26 @@ class My extends React.Component {
     }
 
     render() {
-        //console.log('ownProps',this.props.ownProps);
         return (
-            <MuiThemeProvider>
-                <div>
-                    <Menu cityId={this.state.cityId} />
-                    <h1 className="text-center">Город героев</h1>
-                    <TaskForm
-                        taskEdit={this.state.taskEdit}
-                        cityId={this.state.cityId}
-                        createTask={this.createTask.bind(this)}
-                        taskInsertId={this.taskInsertId.bind(this)}
-                        saveTask={this.saveTask.bind(this)}
-                        cancelEditTask={this.cancelEditTask.bind(this)}
-                    />
-                    <TaskList
-                        tasks={this.props.tasks}
-                        cityId={this.state.cityId}
-                        location={this.props.location}
-                        editTask={this.editTask.bind(this)}
-                        toggleTask={this.toggleTask.bind(this)}
-                        deleteTask={this.deleteTask.bind(this)}
-                        statusTask={this.statusTask.bind(this)}
-                    />
-                </div>
-            </MuiThemeProvider>
+            <Template>
+                <TaskForm
+                    taskEdit={this.state.taskEdit}
+                    cityId={this.state.cityId}
+                    createTask={this.createTask.bind(this)}
+                    taskInsertId={this.taskInsertId.bind(this)}
+                    saveTask={this.saveTask.bind(this)}
+                    cancelEditTask={this.cancelEditTask.bind(this)}
+                />
+                <TaskList
+                    tasks={this.props.tasks}
+                    cityId={this.state.cityId}
+                    location={this.props.location}
+                    editTask={this.editTask.bind(this)}
+                    toggleTask={this.toggleTask.bind(this)}
+                    deleteTask={this.deleteTask.bind(this)}
+                    statusTask={this.statusTask.bind(this)}
+                />
+            </Template>
         );
     }
 
@@ -108,26 +101,7 @@ export default connect(
             dispatch({ type: 'TASK_STATUS', payload });
         },
         onTaskGet: () => {
-            dispatch({ type: 'TASK_LOAD' });
-
-            dispatch({
-                [CALL_API]: {
-                    endpoint: '/api/tasks/get_my.json',
-                    method: 'GET',
-                    types: [
-                        'REQUEST',
-                        {
-                            type: 'SUCCESS',
-                            payload: (action, state, data) => {
-                                data.json().then(payload => {
-                                    dispatch({ type: 'TASK_GET', payload });
-                                });
-                            }
-                        },
-                        'FAILURE'
-                    ]
-                }
-            })
+            dispatch(getMyTasks(dispatch));
         }
     })
 )(My);
