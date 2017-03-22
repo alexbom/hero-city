@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Chip from 'material-ui/Chip';
@@ -6,7 +7,7 @@ import Utils from '../main/utils';
 import CategoryDropdown from './category-dropdown';
 import { user, categories } from '../main/data';
 
-export default class TaskForm extends React.Component {
+class TaskForm extends React.Component {
     
     constructor(props) {
         super(props);
@@ -32,7 +33,7 @@ export default class TaskForm extends React.Component {
         } else {
             task = Utils.defaultProps();
             task.id = this.props.taskInsertId();
-            task.city = user.city;
+            task.city = this.props.city.id;
             task.published_by = user.id;
             task.published_on = new Date().getTime();
         }
@@ -173,3 +174,7 @@ export default class TaskForm extends React.Component {
     }
     
 }
+
+export default connect(
+    state => state
+)(TaskForm);

@@ -246,7 +246,9 @@ class TaskListItem extends React.Component {
     render() {
         const className = this.props.isHidden ? 'selected' : '';
 
-        const actions = (this.props.location.pathname === '/my') ? this.renderMyActions() : this.renderAllActions();
+        const path = this.props.state.routing.locationBeforeTransitions.pathname;
+
+        const actions = (path === '/my') ? this.renderMyActions() : this.renderAllActions();
 
         return (
             <TableRow onClick={this.openTask.bind(this)} className={className}>

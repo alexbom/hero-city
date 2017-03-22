@@ -2,73 +2,76 @@ const initialState = [];
 
 export default function tasks(state = initialState, action) {
 
-    if (action.type === 'TASK_CREATE') {
+    switch (action.type) {
 
-        return [...state, action.payload];
+        case 'TASK_CREATE':
 
-    } else if (action.type === 'TASK_DELETE') {
+            return [...state, action.payload];
 
-        _.remove(state, task => task.id === action.payload);
+        case 'TASK_DELETE':
 
-        return [...state];
+            _.remove(state, task => task.id === action.payload);
 
-    } else if (action.type === 'TASK_SAVE') {
+            return [...state];
 
-        let found = _.find(state, task => task.id === action.payload.id);
+        case 'TASK_SAVE':
 
-        for (let k in action.payload) {
-            found[k] = action.payload[k];
-        }
+            var found = _.find(state, task => task.id === action.payload.id);
 
-        return [...state];
+            for (let i in action.payload) {
+                found[i] = action.payload[i];
+            }
 
-    } else if (action.type === 'TASK_TOGGLE') {
+            return [...state];
 
-        let found = _.find(state, task => task.id === action.payload);
+        case 'TASK_TOGGLE':
 
-        found.isHidden = ! found.isHidden;
+            var found = _.find(state, task => task.id === action.payload);
 
-        return [...state];
+            found.isHidden = ! found.isHidden;
 
-    } else if (action.type === 'TASK_STATUS') {
+            return [...state];
 
-        let found = _.find(state, task => task.id === action.payload.taskId);
+        case 'TASK_STATUS':
 
-        found.status = action.payload.status;
+            var found = _.find(state, task => task.id === action.payload.taskId);
 
-        return [...state];
+            found.status = action.payload.status;
 
-    } else if (action.type === 'TASK_LIKE') {
+            return [...state];
 
-        let found = _.find(state, task => task.id === action.payload.taskId);
-        const pos = found.likes.indexOf(action.payload.userId);
+        case 'TASK_LIKE':
 
-        if (pos === -1) {
-            found.likes.push(action.payload.userId);
-        } else {
-            found.likes.splice(pos, 1);
-        }
+            var found = _.find(state, task => task.id === action.payload.taskId);
+            var index = found.likes.indexOf(action.payload.userId);
 
-        return [...state];
+            if (index === -1) {
+                found.likes.push(action.payload.userId);
+            } else {
+                found.likes.splice(index, 1);
+            }
 
-    } else if (action.type === 'TASK_APPLICANT') {
+            return [...state];
 
-        let found = _.find(state, task => task.id === action.payload.taskId);
-        const pos = found.applicants.indexOf(action.payload.userId);
+        case 'TASK_APPLICANT':
 
-        if (pos === -1) {
-            found.applicants.push(action.payload.userId);
-        } else {
-            found.applicants.splice(pos, 1);
-        }
+            var found = _.find(state, task => task.id === action.payload.taskId);
+            var index = found.applicants.indexOf(action.payload.userId);
 
-        return [...state];
+            if (index === -1) {
+                found.applicants.push(action.payload.userId);
+            } else {
+                found.applicants.splice(index, 1);
+            }
 
-    } else if (action.type === 'TASK_GET') {
+            return [...state];
 
-        return action.payload;
+        case 'TASK_GET':
+
+            return action.payload;
 
     }
 
     return state;
+
 }

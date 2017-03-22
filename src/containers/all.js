@@ -10,10 +10,6 @@ class All extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            cityId: 0
-        };
-
         this.props.onTaskGet();
     }
 
@@ -25,13 +21,10 @@ class All extends React.Component {
         return (
             <Template>
                 <SearchForm
-                    cityId={this.state.cityId}
                     findTask={this.findTask.bind(this)}
                 />
                 <TaskList
                     tasks={this.props.tasks}
-                    cityId={this.state.cityId}
-                    location={this.props.location}
                 />
             </Template>
         );

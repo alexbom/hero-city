@@ -11,8 +11,7 @@ class My extends React.Component {
         super(props);
 
         this.state = {
-            taskEdit: 0,
-            cityId: 0
+            taskEdit: 0
         };
 
         this.props.onTaskGet();
@@ -57,7 +56,6 @@ class My extends React.Component {
             <Template>
                 <TaskForm
                     taskEdit={this.state.taskEdit}
-                    cityId={this.state.cityId}
                     createTask={this.createTask.bind(this)}
                     taskInsertId={this.taskInsertId.bind(this)}
                     saveTask={this.saveTask.bind(this)}
@@ -65,8 +63,6 @@ class My extends React.Component {
                 />
                 <TaskList
                     tasks={this.props.tasks}
-                    cityId={this.state.cityId}
-                    location={this.props.location}
                     editTask={this.editTask.bind(this)}
                     toggleTask={this.toggleTask.bind(this)}
                     deleteTask={this.deleteTask.bind(this)}

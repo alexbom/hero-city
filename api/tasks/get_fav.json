@@ -1,23 +1,5 @@
 [
   {
-    "id": 1,
-    "city": 1,
-    "published_by": 2,
-    "published_on": 1287687648249,
-    "finished_by": 0,
-    "finished_on": 0,
-    "applicants": [],
-    "title": "Перевести бабушку через дорогу",
-    "text": "Vestibulum ex massa, iaculis id sagittis sed, tincidunt non velit. Integer massa justo, dapibus vel ullamcorper ac, eleifend ac arcu. Mauris ornare metus eget nulla facilisis tincidunt nec convallis ligula. Vestibulum nunc metus, convallis auctor risus non, pellentesque interdum ex. Curabitur imperdiet purus erat, eu feugiat risus pellentesque sit amet. Duis tincidunt enim ut tortor rutrum, vel pharetra urna semper. Quisque ut auctor leo. Nullam accumsan quis elit vitae gravida. Integer blandit molestie magna eu sollicitudin. Nullam eleifend metus in mollis porta. Phasellus sed malesuada turpis. Nam purus mi, ornare quis neque faucibus, hendrerit fringilla leo.\nSed eget eros nisi. Curabitur vel sagittis magna. Proin at lectus placerat, suscipit orci nec, ullamcorper neque. Etiam convallis vitae ipsum eget ultrices. Nunc luctus arcu enim, a auctor justo fermentum id. Aliquam erat volutpat. Cras eu velit leo. Duis eget ligula eget elit pellentesque venenatis et sit amet urna. Nullam ac tellus vel enim blandit sagittis id in ipsum. Sed id erat nec eros euismod vestibulum eget id nibh. Curabitur leo tortor, posuere et tortor vel, consectetur egestas sapien. Nullam ligula velit, mollis et orci at, imperdiet convallis dui. Pellentesque ipsum risus, lobortis consectetur tempor ut, dictum id nunc. Fusce at sapien non diam blandit pharetra. Phasellus erat felis, rutrum sed finibus ut, laoreet ac dui. Curabitur dui metus, finibus sit amet vestibulum ac, congue at urna.\nInteger ac mollis odio, in eleifend lacus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel placerat nulla, a rhoncus eros. Fusce sit amet massa lacinia, malesuada lorem sit amet, auctor odio. Etiam magna felis, posuere nec maximus et, sodales interdum ligula. Nulla blandit neque ut lacus lobortis, sed commodo lectus commodo. Mauris mattis pharetra turpis, et tincidunt dui aliquet quis. Vestibulum consequat vestibulum rutrum. Donec ullamcorper nulla quis felis suscipit, id sodales ex faucibus. Cras nec laoreet sapien. Proin egestas sodales est. Integer lobortis tortor id viverra consectetur.",
-    "resources": [],
-    "recruits": [],
-    "categories": [1, 2],
-    "tags": ["Метка 1", "Метка 2"],
-    "likes": [],
-    "status": "pause",
-    "isHidden": false
-  },
-  {
     "id": 2,
     "city": 1,
     "published_by": 1,

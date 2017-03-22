@@ -34,18 +34,15 @@ export default class Utils extends React.Component {
         }
 
         const yy = date.getFullYear().toString().substr(2, 2);
-        const hh = date.getHours();
-        const ii = date.getMinutes();
+        let hh = date.getHours();
+        let ii = date.getMinutes();
         let dd = date.getDate();
         let mm = date.getMonth() + 1;
 
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+        if (hh < 10) hh = '0' + hh;
+        if (ii < 10) ii = '0' + ii;
 
         return dd + '.' + mm + '.' + yy + ' ' + hh + ':' + ii;
     }

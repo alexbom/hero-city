@@ -1,21 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
+import CityDropdown from './city-dropdown';
 
 export default class Menu extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {
-            cityId: this.props.cityId || 1
-        };
-    }
-
-    cityChange(event, index, cityId) {
-        this.setState({ cityId });
+        this.state = {};
     }
 
     render() {
@@ -26,17 +19,7 @@ export default class Menu extends React.Component {
                     <Link to="/my" activeClassName="active">Мои</Link>
                     <Link to="/fav" activeClassName="active">Избранные</Link>
                 </ToolbarGroup>
-                <DropDownMenu
-                    className="dropdown-menu"
-                    value={this.state.cityId}
-                    id="select-city"
-                    onChange={this.cityChange.bind(this)}
-                >
-                    <MenuItem value={1} primaryText="Санкт-Петербург" />
-                    <MenuItem value={2} primaryText="Москва" />
-                    <MenuItem value={3} primaryText="Геленджик" />
-                    <MenuItem value={4} primaryText="Мурманск" />
-                </DropDownMenu>
+                <CityDropdown />
                 <ToolbarGroup>
                     <Link to="/top" activeClassName="active">Рейтинг</Link>
                     <Link to="/set" activeClassName="active">Настройки</Link>

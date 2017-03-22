@@ -7,9 +7,25 @@ module.exports = function() {
             javascript: './src/index.js'
         },
         output: {
-            path: path.join(__dirname, '../'),
-            filename: 'app.js'
+            path: __dirname,
+            filename: '../app.js'
         },
+        plugins: [
+            new webpack.optimize.DedupePlugin(),
+            new webpack.optimize.UglifyJsPlugin({
+                beautify: false,
+                comments: false,
+                compress: {
+                    sequences    : true,
+                    booleans     : true,
+                    loops        : true,
+                    unused       : true,
+                    warnings     : false,
+                    drop_console : true,
+                    unsafe       : true
+                }
+            })
+        ],
         module: {
             loaders: [
                 {

@@ -1,13 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
-import $ from 'jquery';
 import CategoryDropdown from './category-dropdown';
 import StatusDropdown from './status-dropdown';
 import Utils from '../main/utils';
 
-export default class SearchForm extends React.Component {
+class SearchForm extends React.Component {
     
     constructor(props) {
         super(props);
@@ -122,7 +122,7 @@ export default class SearchForm extends React.Component {
                     name="maxDate"
                 />
                 <br /><br />
-                <input type="hidden" name="cityId" value={this.props.cityId} />
+                <input type="hidden" name="cityId" value={this.props.city.id} />
                 <RaisedButton type="submit" label="Найти задания" primary={true} />
                 {cancel}
             </form>
@@ -130,3 +130,7 @@ export default class SearchForm extends React.Component {
     }
     
 }
+
+export default connect(
+    state => state
+)(SearchForm);
