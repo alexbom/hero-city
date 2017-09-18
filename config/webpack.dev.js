@@ -1,5 +1,4 @@
 var webpack = require('webpack');
-var path = require('path');
 
 module.exports = function() {
     return {
@@ -31,6 +30,10 @@ module.exports = function() {
                 {
                     test: /\.less$/,
                     loader: "style!css!less"
+                },
+                {
+                    test: /\.css$/,
+                    loader:'style!css!'
                 }
             ]
         }

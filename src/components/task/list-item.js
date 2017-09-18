@@ -16,7 +16,7 @@ import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
 import Avatar from 'material-ui/Avatar';
 import $ from 'jquery';
-import Utils from '../main/utils';
+import { taskProps, dateFormat, nl2br } from '../main/utils';
 import { user, statuses, categories } from '../main/data';
 import ReactTooltip from 'react-tooltip';
 
@@ -33,13 +33,13 @@ class TaskListItem extends React.Component {
     onEditClick(event) {
         event.stopPropagation();
 
-        let props = Utils.defaultProps();
+        let props = taskProps();
 
         for (let k in props) {
             props[k] = _.find(this.props, (prop, index) => { return index === k; });
         }
 
-        this.props.editTask(props);
+        this.editTask(props);
 
         $('html, body').animate({ scrollTop: 0 }, 'fast');
     }
@@ -58,10 +58,18 @@ class TaskListItem extends React.Component {
         this.setState({ status });
     }
 
+    toggleTask(taskId) {
+        this.props.onToggleTask(taskId);
+    }
+
     openTask(event) {
         this.setState({ isOpen: ! this.state.isOpen });
 
         $('html, body').animate({ scrollTop: $(event.target).closest('tr').offset().top }, 'fast');
+    }
+
+    editTask(task) {
+        this.props.onEditTask(task);
     }
 
     renderMyActions() {
@@ -92,8 +100,8 @@ class TaskListItem extends React.Component {
                     onClick={e=>{e.stopPropagation()}}
                 >
                     <Toggle
-                        defaultToggled={!this.props.isHidden}
-                        onToggle={this.props.toggleTask.bind(this, this.props.id)}
+                        toggled={!this.props.isHidden}
+                        onToggle={this.toggleTask.bind(this, this.props.id)}
                     />
                 </IconButton>
                 <IconButton tooltip="Изменить" onClick={this.onEditClick.bind(this)}>
@@ -116,7 +124,7 @@ class TaskListItem extends React.Component {
     }
 
     renderAllActions() {
-        const found = _.find(statuses, status => status.name === this.props.status);
+        const found  = _.find(statuses, status => status.name === this.props.status);
         const status = found ? found.translate : '';
 
         return (
@@ -160,11 +168,11 @@ class TaskListItem extends React.Component {
             applicantsClass += ' active';
         }
 
-        const published_on = Utils.dateFormat(props.published_on);
+        const published_on = dateFormat(props.published_on, true);
 
         const published_ava = '/img/ava/' + props.published_by + '.gif';
 
-        let text = Utils.nl2br(this.props.text);
+        let text = nl2br(this.props.text);
 
         text = this.state.isOpen ? <p dangerouslySetInnerHTML={{__html: text}} /> : '';
 
@@ -183,7 +191,7 @@ class TaskListItem extends React.Component {
         let finished = '';
 
         if (props.finished_by) {
-            const finished_on = Utils.dateFormat(props.finished_on);
+            const finished_on = dateFormat(props.finished_on, true);
 
             const finished_ava = '/img/ava/' + props.finished_by + '.gif';
 
@@ -271,6 +279,12 @@ export default connect(
         },
         onApplicantTask: (payload) => {
             dispatch({ type: 'TASK_APPLICANT', payload });
+        },
+        onToggleTask: payload => {
+            dispatch({ type: 'TASK_TOGGLE', payload });
+        },
+        onEditTask: payload => {
+            dispatch({ type: 'TASK_EDIT', payload });
         }
     })
 )(TaskListItem);

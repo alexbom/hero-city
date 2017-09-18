@@ -1,23 +1,44 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
 import Template from '../components/main/template';
 import TaskList from '../components/task/list';
 import SearchForm from '../components/task/search-form';
 import { getAllTasks } from '../actions/tasks';
+import { num2word } from '../components/main/utils';
+import _ from 'lodash';
 
 class All extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.props.onTaskGet();
+        this.state = {
+            pageSize: 10,
+            current: 1,
+            total: 3
+        };
+
+        this.props.onTaskGet(this.state.pageSize, this.state.current);
     }
 
-    findTask(props) {
+    findTask(props = {}) {
         this.props.onTaskFind(props);
     }
 
     render() {
+        const total = this.state.total;
+
+        const pages = ! total ? <div className="rc-pagination">Заданий не найдено</div> :
+            <div></div>;
+        /*
+            <Pagination
+                showTotal={total => 'Найдено ' + total + ' ' + num2word(total, ['задание','задания','заданий']) }
+                total={total}
+            />;
+         */
+
         return (
             <Template>
                 <SearchForm
@@ -26,57 +47,21 @@ class All extends React.Component {
                 <TaskList
                     tasks={this.props.tasks}
                 />
+                {pages}
             </Template>
         );
     }
 
 }
 
-function filterTasks(state) {
-    if ( ! state.taskFilters) {
-        return _.filter(state.tasks, task => ! task.isHidden);
-    }
-
-    return _.filter(state.tasks, task => {
-        let ok = ! task.isHidden;
-
-        if (state.taskFilters.categoryId) {
-            ok &= task.categories.indexOf(state.taskFilters.categoryId) !== -1;
-        }
-
-        if (state.taskFilters.status) {
-            ok &= task.status === state.taskFilters.status;
-        }
-
-        if (state.taskFilters.title) {
-            const lowerCase = state.taskFilters.title.toLowerCase();
-
-            ok &= (task.title.toLowerCase().indexOf(lowerCase) !== -1 || task.text.toLowerCase().indexOf(lowerCase) !== -1);
-        }
-
-        if (state.taskFilters.minDate) {
-            ok &= task.published_on > state.taskFilters.minDate.getTime();
-        }
-
-        if (state.taskFilters.maxDate) {
-            ok &= task.published_on < state.taskFilters.maxDate.getTime();
-        }
-
-        return ok;
-    });
-}
-
 export default connect(
-    (state, ownProps) => ({
-        tasks: filterTasks(state),
-        ownProps
-    }),
+    state => state,
     dispatch => ({
         onTaskFind: (payload) => {
             dispatch({ type: 'TASK_FIND', payload });
         },
-        onTaskGet: () => {
-            dispatch(getAllTasks(dispatch));
+        onTaskGet: (pageSize, current) => {
+            dispatch(getAllTasks(dispatch, pageSize, current));
         }
     })
 )(All);

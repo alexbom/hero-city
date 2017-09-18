@@ -14,7 +14,11 @@ body {
   margin: 0 auto;
   overflow: hidden;
 }
+.bg-1 {
+  background: rgba(255, 255, 255, 0.95) !important;
+}
 .toolbar {
+  position: relative;
   margin-top: 3px;
   background: rgba(0, 0, 0, 0.5) !important;
 }
@@ -28,7 +32,16 @@ body {
 .toolbar a.active {
   background-color: #000;
 }
+#select-city {
+  position: absolute!important;
+  left: 50%;
+  top: 0;
+  width: 200px!important;
+  background: #fff;
+  margin-left: -100px;
+}
 .form-top {
+  background: rgba(255, 255, 255, 0.95) !important;
   max-width: 600px;
   margin: 0 auto 30px;
   padding: 30px;
@@ -41,11 +54,6 @@ body {
 .form-top input[type="text"] {
   text-align: center;
 }
-.form-top,
-.table-tasks th,
-.table-tasks td {
-  background: rgba(255, 255, 255, 0.95) !important;
-}
 .form-buttons {
   margin-top: 15px;
 }
@@ -57,17 +65,6 @@ body {
   display: inline-block !important;
   margin: 1px!important;
   line-height: 40px!important;
-}
-.toolbar {
-  position: relative;
-}
-.toolbar #select-city {
-  position: absolute!important;
-  left: 50%;
-  top: 0;
-  width: 200px!important;
-  background: #fff;
-  margin-left: -100px;
 }
 .dropdown-menu {
   height: 100%!important;
@@ -84,6 +81,10 @@ body {
 .table-tasks thead,
 .table-tasks tbody {
   background: none!important;
+}
+.table-tasks th,
+.table-tasks td {
+  background: rgba(255, 255, 255, 0.95) !important;
 }
 .table-tasks td {
   font-size: 15px!important;
@@ -132,6 +133,9 @@ th.table-actions {
 }
 td.table-actions-my {
   padding-top: 25px;
+}
+td.table-actions-all {
+  text-align: center!important;
 }
 td.table-actions-all > * {
   margin-bottom: 10px;
@@ -185,6 +189,18 @@ td.table-actions-all > * {
 .action-cancel {
   float: right;
   margin-top: -4px;
+}
+.rc-pagination {
+  background: rgba(255, 255, 255, 0.95) !important;
+  margin: 0;
+  padding: 20px;
+}
+.task-items {
+  max-width: 150px;
+}
+.resource-edit {
+  display: block;
+  border: 1px #e0e0e0 solid;
 }
 @media only screen and (max-width: 992px) {
   .task-footer {

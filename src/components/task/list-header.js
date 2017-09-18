@@ -6,8 +6,10 @@ export default class TaskListHeader extends React.Component {
     render() {
         return (
             <TableRow>
-                <TableHeaderColumn>Задания</TableHeaderColumn>
-                <TableHeaderColumn className="table-actions">Действия</TableHeaderColumn>
+
+                {/*<TableHeaderColumn>Задания</TableHeaderColumn>
+                <TableHeaderColumn className="table-actions">Действия</TableHeaderColumn>*/}
+
             </TableRow>
         );
     }

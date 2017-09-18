@@ -1,5 +1,4 @@
 var webpack = require('webpack');
-var path = require('path');
 
 module.exports = function() {
     return {
@@ -13,9 +12,9 @@ module.exports = function() {
         plugins: [
             new webpack.optimize.DedupePlugin(),
             new webpack.optimize.UglifyJsPlugin({
-                beautify: false,
-                comments: false,
-                compress: {
+                beautify : false,
+                comments : false,
+                compress : {
                     sequences    : true,
                     booleans     : true,
                     loops        : true,
@@ -36,6 +35,10 @@ module.exports = function() {
                 {
                     test: /\.less$/,
                     loader: "style!css!less"
+                },
+                {
+                    test: /\.css$/,
+                    loader:'style!css!'
                 }
             ]
         }

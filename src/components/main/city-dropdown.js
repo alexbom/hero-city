@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
+import $ from 'jquery';
 
 class CityDropdown extends React.Component {
 
@@ -10,6 +11,17 @@ class CityDropdown extends React.Component {
     }
 
     cityChange(event, index, cityId) {
+        let body = $('body'),
+            bg   = $('<div class="city-bg"></div>'),
+            url  = 'url("/img/city/' + cityId + '.jpg")';
+
+        body.append(bg);
+        bg.css({ backgroundImage: url, opacity: 0 });
+        bg.animate({ opacity: 1 }, function() {
+            $('body').css({ backgroundImage: url });
+            bg.remove();
+        });
+
         this.props.onCityChange(cityId);
     }
 
@@ -34,8 +46,8 @@ class CityDropdown extends React.Component {
 export default connect(
     state => state,
     dispatch => ({
-        onCityChange: (cityId) => {
-            dispatch({ type: 'CITY_CHANGE', payload: cityId });
+        onCityChange: (payload) => {
+            dispatch({ type: 'CITY_CHANGE', payload });
         }
     })
 )(CityDropdown);

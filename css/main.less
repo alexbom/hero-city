@@ -1,6 +1,7 @@
 body {
-	margin: 0;
-	background: url('/img/bg.jpg') 50% 0 fixed no-repeat;
+	margin: 0 0 100px;
+	background: url('/img/city/1.jpg') 50% 0 fixed no-repeat;
+	background-size: cover;
 	font-family: 'Roboto', sans-serif;
 }
 
@@ -18,25 +19,60 @@ body {
 	overflow: hidden;
 }
 
+.bg-1 {
+	background: rgba(255, 255, 255, .95)!important;
+}
+
+.city-bg {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: 0 0 no-repeat;
+	background-size: cover;
+}
+
+.title {
+	z-index: 1;
+	position: relative;
+	text-align: center;
+	color: #fff;
+}
+
 .toolbar {
+	z-index: 1;
+	position: relative;
 	margin-top: 3px;
 	background: rgba(0, 0, 0, .5)!important;
 
 	a {
 		padding: 17px;
 		color: #fff;
-	}
 
-	a:hover {
-		background-color: rgba(0, 0, 0, .25);
-	}
+		&:hover {
+			background-color: rgba(0, 0, 0, .25);
+		}
 
-	a.active {
-		background-color: #000;
+		&.active {
+			background-color: #000;
+		}
 	}
 }
 
+#select-city {
+	position: absolute!important;
+	left: 50%;
+	top: 0;
+	width: 200px!important;
+	background: #fff;
+	margin-left: -100px;
+}
+
 .form-top {
+	.bg-1;
+	z-index: 1;
+	position: relative;
 	max-width: 600px;
 	margin: 0 auto 30px;
 	padding: 30px;
@@ -50,10 +86,6 @@ body {
 	input[type="text"] {
 		text-align: center;
 	}
-}
-
-.form-top, .table-tasks th, .table-tasks td {
-	background: rgba(255, 255, 255, .95)!important;
 }
 
 .form-buttons {
@@ -71,19 +103,6 @@ body {
 	line-height: 40px!important;
 }
 
-.toolbar {
-	position: relative;
-
-	#select-city {
-		position: absolute!important;
-		left: 50%;
-		top: 0;
-		width: 200px!important;
-		background: #fff;
-		margin-left: -100px;
-	}
-}
-
 .dropdown-menu {
 	height: 100%!important;
 
@@ -97,10 +116,16 @@ body {
 }
 
 .table-tasks {
+	z-index: 1;
+	position: relative;
 	background: none!important;
 
 	thead, tbody {
 		background: none!important;
+	}
+
+	th, td {
+		.bg-1;
 	}
 
 	td {
@@ -167,6 +192,8 @@ td.table-actions-my {
 }
 
 td.table-actions-all {
+	text-align: center!important;
+
 	> * {
 		margin-bottom: 10px;
 	}
@@ -239,7 +266,31 @@ td.table-actions-all {
 	margin-top: -4px;
 }
 
+.rc-pagination {
+	.bg-1;
+	margin: 0;
+	padding: 20px;
+}
+
+.task-items {
+	max-width: 150px;
+}
+
+.resource-edit {
+	display: block;
+	border: 1px #e0e0e0 solid;
+}
+
+.toolbar-burger {
+	display: none!important;
+}
+
 @media only screen and (max-width: 992px) {
+
+	#app .container {
+		padding-top: 60px;
+	}
+
 	.task-footer {
 		white-space: normal;
 
@@ -248,10 +299,55 @@ td.table-actions-all {
 			width: 49.8%;
 		}
 	}
+
+	.toolbar {
+		z-index: 2;
+		position: fixed !important;
+		top: 0;
+		width: 100%;
+		padding: 0 6px !important;
+		background: rgba(0, 0, 0, .9)!important;
+
+		.toolbar-menu {
+			display: block !important;
+
+			a {
+				position: fixed;
+				top: 0;
+				left: 0;
+				display: none;
+				width: 100%;
+				background: rgba(0, 0, 0, .9);
+				border-bottom: 1px rgba(255, 255, 255, .25) solid;
+				text-decoration: none;
+			}
+
+			.toolbar-burger {
+				margin: 4px 0 0 0 !important;
+			}
+		}
+
+		.toolbar-burger {
+			display: block !important;
+		}
+	}
+
 }
 
 @media only screen and (max-width: 768px) {
+
 	.task-footer > div {
 		width: 100%;
 	}
+
+	.table-tasks tbody, .table-tasks tr, .table-tasks td {
+		display: block;
+		width: auto!important;
+		height: auto!important;
+	}
+
+}
+
+@media only screen and (max-width: 320px) {
+
 }

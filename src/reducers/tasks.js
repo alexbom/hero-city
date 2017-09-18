@@ -42,8 +42,8 @@ export default function tasks(state = initialState, action) {
 
         case 'TASK_LIKE':
 
-            var found = _.find(state, task => task.id === action.payload.taskId);
-            var index = found.likes.indexOf(action.payload.userId);
+            var found = _.find(state, task => task.id === action.payload.taskId),
+                index = found.likes.indexOf(action.payload.userId);
 
             if (index === -1) {
                 found.likes.push(action.payload.userId);
@@ -55,8 +55,8 @@ export default function tasks(state = initialState, action) {
 
         case 'TASK_APPLICANT':
 
-            var found = _.find(state, task => task.id === action.payload.taskId);
-            var index = found.applicants.indexOf(action.payload.userId);
+            var found = _.find(state, task => task.id === action.payload.taskId),
+                index = found.applicants.indexOf(action.payload.userId);
 
             if (index === -1) {
                 found.applicants.push(action.payload.userId);

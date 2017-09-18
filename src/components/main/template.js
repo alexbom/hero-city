@@ -16,7 +16,7 @@ export default class Template extends React.Component {
                 <MuiThemeProvider>
                     <div className="container">
                         <Menu />
-                        <h1 className="text-center">Город героев</h1>
+                        <h1 className="title">Город героев</h1>
                         {this.props.children}
                     </div>
                 </MuiThemeProvider>

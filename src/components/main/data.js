@@ -21,8 +21,9 @@ export const statuses = [
 ];
 
 export const categories = [
-    { id: 1, translate: 'Услуги' },
-    { id: 2, translate: 'Товары' }
+    { id: 1, translate: 'Материальная помощь' },
+    { id: 2, translate: 'Физическая помощь' },
+    { id: 3, translate: 'Нужна консультация' }
 ];
 
 export const cities = [

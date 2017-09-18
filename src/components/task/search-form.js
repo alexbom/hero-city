@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import CategoryDropdown from './category-dropdown';
 import StatusDropdown from './status-dropdown';
-import Utils from '../main/utils';
+import { dateFormat } from '../main/utils';
 
 class SearchForm extends React.Component {
     
@@ -33,10 +33,17 @@ class SearchForm extends React.Component {
         };
     }
 
+    handleChange(event, value) {
+        this.state[event.target.name] = value;
+
+        this.setState(this.state);
+    }
+
     handleSubmit(event) {
         event.preventDefault();
 
         this.props.findTask(this.state);
+        //this.props.onFindTask(this.state);
 
         this.setState({ isSearching: true });
     }
@@ -46,7 +53,7 @@ class SearchForm extends React.Component {
 
         this.setState(this.state);
 
-        this.props.findTask({});
+        this.props.findTask();
     }
 
     selectCategory(categoryId) {
@@ -55,12 +62,6 @@ class SearchForm extends React.Component {
 
     selectStatus(status) {
         this.setState({ status });
-    }
-
-    handleChange(event, value) {
-        this.state[event.target.name] = value;
-
-        this.setState(this.state);
     }
 
     handleChangeMinDate(event, minDate) {
@@ -78,7 +79,7 @@ class SearchForm extends React.Component {
 
         return (
             <form onSubmit={this.handleSubmit.bind(this)} className="form-top">
-                <legend>Задания в Вашем городе</legend>
+                <legend>Задания для героев Вашего города</legend>
                 <TextField
                     placeholder="Поиск по заголовку и описанию"
                     name="title"
@@ -102,8 +103,7 @@ class SearchForm extends React.Component {
                 <DatePicker
                     onChange={this.handleChangeMinDate.bind(this)}
                     autoOk={true}
-                    value={this.state.minDate}
-                    formatDate={Utils.dateFormat}
+                    formatDate={dateFormat}
                     /*DateTimeFormat={()=>dateTimeFormat}
                     locale="ru-RU"*/
                     floatingLabelText="От"
@@ -113,8 +113,7 @@ class SearchForm extends React.Component {
                 <DatePicker
                     onChange={this.handleChangeMaxDate.bind(this)}
                     autoOk={true}
-                    value={this.state.maxDate}
-                    formatDate={Utils.dateFormat}
+                    formatDate={dateFormat}
                     /*DateTimeFormat={()=>dateTimeFormat}
                     locale="ru-RU"*/
                     floatingLabelText="До"
@@ -130,6 +129,13 @@ class SearchForm extends React.Component {
     }
     
 }
+
+/*export default connect(
+    (state, ownProps) => ({
+        state,
+        ownProps
+    }),
+)(SearchForm);*/
 
 export default connect(
     state => state
